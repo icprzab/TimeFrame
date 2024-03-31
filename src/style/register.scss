@@ -1,0 +1,103 @@
+.register {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  z-index: 17;
+  background-color: white;
+  background-image: url('../assets/pens.png');
+  background-repeat: no-repeat;
+  background-position: bottom center;
+  background-attachment: fixed;
+  background-size: 100vw;
+
+  .register_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100vw;
+    height: 60px;
+    .register_logo > img {
+      margin-left: 50px;
+      height: 37px;
+      cursor: pointer;
+    }
+  }
+  .register_header > button {
+    width: 90px;
+    height: 38px;
+    outline: none;
+    background-color: white;
+    border-radius: 5px;
+    font-size: 20px;
+    font-weight: 700;
+    margin-right: 50px;
+  }
+  .register_body {
+    position: absolute;
+    z-index: 17;
+    width: 100%;
+    height: calc(100vh - 60px);
+    display: flex;
+    justify-content: center;
+    .register_body_container {
+      background-color: white;
+      margin-top: 25px;
+      padding-top: 23px;
+      width: 360px;
+      height: 450px;
+      border: 2px solid black;
+      border-radius: 5px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      box-shadow: 1px 1px 5px #4d4d4d;
+      .register_topic {
+        padding-bottom: 15px;
+        font-size: 28px;
+        font-weight: 700;
+      }
+
+      .register_text {
+        width: 250px;
+        font-size: 20px;
+        font-weight: 700;
+      }
+      .register_input > input {
+        width: 250px;
+        height: 32px;
+        padding-left: 5px;
+        font-size: 17px;
+        border: 1px solid black;
+        border-radius: 2.5px;
+      }
+      .register_alert {
+        padding-left: 5px;
+        width: 250px;
+        height: 40px;
+        color: red;
+        opacity: 0;
+      }
+      .register_input > input:focus {
+        outline: 2px solid #ff9900;
+        border: 0;
+      }
+      .register_change {
+        text-decoration: none;
+        margin-top: 20px;
+        font-size: 18px;
+        color: #0052d6;
+      }
+    }
+    .register_body_container > button {
+      margin-top: 20px;
+      width: 90px;
+      height: 38px;
+      outline: none;
+      background-color: white;
+      border-radius: 5px;
+      font-size: 20px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+  }
+}
