@@ -6,17 +6,17 @@
 
 ## Classify different tasks by color.
 
-![cover](./readme-picture/color.mp4)
+<video src="./readme-picture/color.mp4" controls="controls" width="500" height="300" autoplay="autoplay"></video>
 </br>
 
 ## Click and select the period then release the mouse to add a task.
 
-![multi_date](./readme-picture/multi_date.mp4)
+<video src="./readme-picture/multi_date.mp4" controls="controls" width="500" height="300" autoplay="autoplay"></video>
 </br>
 
 ## Click on the date and hold down the mouse until the window popup to add a specific date task.
 
-![single_date](./readme-picture/single_date.mp4)
+<video src="./readme-picture/single_date.mp4" controls="controls" width="500" height="300" autoplay="autoplay"></video>
 </br>
 
 ## DEMO Video
