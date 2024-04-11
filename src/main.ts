@@ -12,12 +12,12 @@ import VueDatePicker from '@vuepic/vue-datepicker'
 import '@vuepic/vue-datepicker/dist/main.css'
 
 const firebaseConfig: object = {
-  apiKey: '',
-  authDomain: '',
-  projectId: '',
-  storageBucket: '',
-  messagingSenderId: '',
-  appId: ''
+  apiKey: JSON.parse(import.meta.env.VITE_SOME_KEY).apiKey,
+  authDomain: JSON.parse(import.meta.env.VITE_SOME_KEY).authDomain,
+  projectId: JSON.parse(import.meta.env.VITE_SOME_KEY).projectId,
+  storageBucket: JSON.parse(import.meta.env.VITE_SOME_KEY).storageBucket,
+  messagingSenderId: JSON.parse(import.meta.env.VITE_SOME_KEY).messagingSenderId,
+  appId: JSON.parse(import.meta.env.VITE_SOME_KEY).appId
 }
 
 const firestoreSetup: object = initializeApp(firebaseConfig)
