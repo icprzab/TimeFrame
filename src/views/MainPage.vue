@@ -9,7 +9,6 @@ import { useStore } from 'vuex';
 import { db } from '../main.ts'
 import { doc, getDoc, setDoc, collection, getDocs, onSnapshot, updateDoc, deleteDoc } from "firebase/firestore";
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
-import { VueSpinnerIos } from 'vue3-spinners';
 let store = useStore();
 let showEvents = ref<boolean>(false)
 let showDetail = ref<boolean>(false)
@@ -35,7 +34,7 @@ let colorContainer = ref<object>(false)
 let calendarPage = ref<string>(null)
 let isUpdate = ref<boolean>(false)
 let isDelete = ref<boolean>(false)
-let addPage = ref<boolean>(false)
+let addTask = ref<boolean>(false)
 let titleInput = ref<string>(null)
 let clickSave = ref<boolean>(false)
 let isLongPress = ref<boolean>(false)
@@ -122,7 +121,7 @@ watch(store.state.today, () => {
         let date = new Date()
         date.setUTCHours(0, 0, 0, 0);
         let dateString = date.toUTCString()
-        AddNewPage({ start: dateString }, 1)
+        AddNewTask({ start: dateString }, 1)
     }
 });
 
@@ -162,7 +161,7 @@ onUpdated(() => {
             blackColor.value.focus()
         }
     }
-    if (addPage.value && !showDetail.value) {
+    if (addTask.value && !showDetail.value) {
         if (titleFocus == 0) {
             titleFocus++
             titleInput.value.focus()
@@ -189,7 +188,7 @@ function startPress(event) {
         pressTimer = setTimeout(() => {
             if (!mouseMoved.value) {
                 isLongPress.value = true
-                AddNewPage(ClickDayInfo, 1)
+                AddNewTask(ClickDayInfo, 1)
             }
         }, 500);
     }
@@ -210,9 +209,9 @@ function handleMouseMove(event) {
     }
 };
 
-function AddNewPage(selectInfo, dayCount) {
+function AddNewTask(selectInfo, dayCount) {
     let EventID: number = (new Date()).getTime()
-    addPage.value = true
+    addTask.value = true
     if (dayCount > 1) {
         interface task {
             id: string
@@ -448,7 +447,7 @@ function backToEvents() {
 }
 
 function closePopup() {
-    if (addPage.value && !showDetail.value && !completeSave.value) {
+    if (addTask.value && !showDetail.value && !completeSave.value) {
         if (!showDelete.value) {
             showDelete.value = true
         }
@@ -463,7 +462,7 @@ function closePopup() {
             tasks.value = false
             showDelete.value = false
             clickSave.value = false
-            addPage.value = false
+            addTask.value = false
             showColor.value = false
             titleFocus = 0
             completeSave.value = false
@@ -488,10 +487,10 @@ function deleteEvent() {
     let deleteRef: object = doc(db, "user", userUID.value, "task", singleTask.value.id);
     deleteDoc(deleteRef).then(() => {
         store.commit('DELETE_EVENT', { id: singleTask.value.id })
-        if (!addPage.value || (addPage.value && clickSave.value)) {
+        if (!addTask.value || (addTask.value && clickSave.value)) {
             isDelete.value = true
         }
-        addPage.value = false
+        addTask.value = false
         titleFocus = 0
         closePopup()
     })
@@ -551,7 +550,7 @@ let calendarOptions: object = ref({
         let count: number = Math.round(Math.abs((startDay - endDay) / oneDay));
         let dayCount: number = (count + 1);
         if (dayCount > 1) {
-            AddNewPage(selectInfo, dayCount)
+            AddNewTask(selectInfo, dayCount)
         }
     },
     moreLinkClick: function (info) {
@@ -610,7 +609,7 @@ let calendarOptions: object = ref({
                 </div>
                 <div class="detail_header" :style="{ backgroundColor: singleTask.color }">
                     <div class="detail_header_date">
-                        <div class="detail_header_back" @click="backToEvents" v-if="!addPage && !completeSave">
+                        <div class="detail_header_back" @click="backToEvents" v-if="!addTask && !completeSave">
                             <Back />
                         </div>
                         <div class="detail_header_title">{{ singleTask.title }}</div>
@@ -692,7 +691,7 @@ let calendarOptions: object = ref({
                     </div>
                 </div>
                 <div class="edit_header">
-                    <div class="edit_header_left" v-if="!addPage || (addPage && completeSave)">
+                    <div class="edit_header_left" v-if="!addTask || (addTask && completeSave)">
                         <Back class="edit_header_back" @click="eventDetail(singleTask.id)" />
                         <div v-if="!singleTask.title && clickSave">*Title field is required.</div>
                     </div>

@@ -5,7 +5,7 @@ import { createStore } from 'vuex'
 import { initializeApp } from 'firebase/app'
 import { getFirestore } from 'firebase/firestore'
 import { getAuth, onAuthStateChanged } from 'firebase/auth'
-import { VueSpinnersPlugin } from 'vue3-spinners'
+import { VueSpinnerIos } from 'vue3-spinners'
 import router from './router'
 import * as Icons from '@element-plus/icons-vue'
 import VueDatePicker from '@vuepic/vue-datepicker'
@@ -19,14 +19,9 @@ const firebaseConfig: object = {
   messagingSenderId: JSON.parse(import.meta.env.VITE_SOME_KEY).messagingSenderId,
   appId: JSON.parse(import.meta.env.VITE_SOME_KEY).appId
 }
-
 const firestoreSetup: object = initializeApp(firebaseConfig)
 export const db: object = getFirestore(firestoreSetup)
 export const auth = getAuth(firestoreSetup)
-const app = createApp(App)
-Object.keys(Icons).forEach((key) => {
-  app.component(key, Icons[key])
-})
 
 router.beforeEach((to, from, next) => {
   if (to.meta.requiresAuth) {
@@ -87,9 +82,12 @@ const store: object = createStore({
     }
   }
 })
-
+const app = createApp(App)
+Object.keys(Icons).forEach((key) => {
+  app.component(key, Icons[key])
+})
 app.component('VueDatePicker', VueDatePicker)
-app.use(VueSpinnersPlugin)
+app.component('VueSpinnerIos', VueSpinnerIos)
 app.use(router)
 app.use(store)
 app.mount('#app')
